@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "net.hollowcube"
-version = "1.0.0"
+version = "1.0.1"
 base.archivesName = "compat"
 
 repositories {
