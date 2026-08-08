@@ -1,0 +1,5 @@
+[libraries]
+minestom = { module = "net.minestom:minestom", version = "2026.08.07-26.2" }
+slf4j = { module = "org.slf4j:slf4j-api", version = "2.0.18" }
+fastutil = { module = "it.unimi.dsi:fastutil", version = "8.5.18" }
+zstd = { module = "com.github.luben:zstd-jni", version = "1.5.7-11" }

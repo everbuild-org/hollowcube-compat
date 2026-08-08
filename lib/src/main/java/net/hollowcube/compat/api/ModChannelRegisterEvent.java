@@ -1,0 +1,48 @@
+package net.hollowcube.compat.api;
+
+import net.hollowcube.common.util.ProtocolVersions;
+import net.kyori.adventure.text.Component;
+import net.minestom.server.entity.Player;
+import net.minestom.server.event.trait.PlayerEvent;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ModChannelRegisterEvent implements PlayerEvent {
+    private final Player player;
+    private final List<String> channels;
+    private final List<Component> disabledMods = new ArrayList<>();
+
+    public ModChannelRegisterEvent(@NotNull Player player, @NotNull List<String> channels) {
+        this.player = player;
+        this.channels = channels;
+    }
+
+    @Override
+    public @NotNull Player getPlayer() {
+        return player;
+    }
+
+    public @NotNull List<Component> getDisabledMods() {
+        return disabledMods;
+    }
+
+    public @NotNull List<String> getChannels() {
+        return channels;
+    }
+
+    public boolean excludeNamespace(@NotNull String... namespaces) {
+        boolean removed = false;
+        for (String namespace : namespaces) {
+            removed |= channels.removeIf(channel -> channel.startsWith(namespace + ":"));
+        }
+        return removed;
+    }
+
+    public void excludeNamespace(@NotNull Component modName, @NotNull String... namespaces) {
+        if (excludeNamespace(namespaces)) {
+            disabledMods.add(modName);
+        }
+    }
+}
